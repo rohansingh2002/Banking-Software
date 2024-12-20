@@ -1,0 +1,48 @@
+spring: 
+  cloud:
+    compatibility-verifier:
+      enabled: false
+    loadbalancer:
+      enabled: true
+  application:
+    name: auth-service
+  main:
+    allow-bean-definition-overriding: true
+  jpa: 
+    show-sql: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+#  datasource: 
+#    url: jdbc:postgresql://10.118.14.12:5432/ocsdb
+#    driver-class-name: org.postgresql.Driver
+#    username: ocsdev
+#    password: ocsdev123
+#    hikari:
+#      max-lifetime: 540000
+      
+server:
+  port: 8080
+  servlet:
+    context-path: /auth-service
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    serviceUrl:
+       defaultZone: ${EUREKA_URL}
+#      defaultZone: http://devv9cmbkap01.dohabank.internal:8080/discovery-service/eureka
+feign:
+  client:
+    config:
+      default:
+        connectionTimeout: 16000000
+        readTimeout: 16000000      
+
+springdoc:
+  api-docs:
+    path: /authservice/v3/api-docs
+  swagger-ui:
+    path: /authservice/swagger-ui.html
